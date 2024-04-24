@@ -2,10 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bml0c8ha8hkh8" path="res://assets/sprites/Base Character /idle_masked.png" id="1_1ba5k"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjn4n"]
-radius = 8.0
-height = 32.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6da3f"]
 atlas = ExtResource("1_1ba5k")
 region = Rect2(0, 160, 80, 80)
@@ -141,17 +137,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjn4n"]
+radius = 8.0
+height = 32.0
+
 [node name="Bandit" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 texture_filter = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(0.74, 0.48)
-shape = SubResource("CapsuleShape2D_pjn4n")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_x5kym")
 animation = &"idle-down"
-frame_progress = 0.94549
+frame_progress = 0.268126
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(0.74, 0.48)
+shape = SubResource("CapsuleShape2D_pjn4n")
