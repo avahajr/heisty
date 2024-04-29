@@ -8,7 +8,7 @@ func _process(delta: float) -> void:
 	#gets player input
 	var x_axis = Input.get_axis("ui_left", "ui_right")
 	var y_axis = Input.get_axis("ui_up", "ui_down")
-	var input := Vector2(x_axis, y_axis) 
+	var input := Vector2(x_axis, y_axis).normalized()
 	
 	var speed := 100.0 
 	
@@ -25,11 +25,8 @@ func _process(delta: float) -> void:
 		sprite2D.play("walk-up")
 	elif input == Vector2(0,0): 
 		sprite2D.play("idle-down") 
-		
-
- 		
-		
-		
+	
+	move_and_slide()
 	
 	
 	

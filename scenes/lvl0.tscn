@@ -1714,5 +1714,4 @@ position = Vector2(-89, 118)
 position = Vector2(-85, 116)
 
 [node name="Police" parent="." instance=ExtResource("6_vw6ar")]
-visible = false
 position = Vector2(28, 282)

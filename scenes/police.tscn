@@ -395,7 +395,7 @@ script = ExtResource("1_awtxc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Police"]
 texture_filter = 1
-position = Vector2(11.5, -10)
+position = Vector2(-9.53674e-07, 0)
 scale = Vector2(1.2875, 1.25)
 sprite_frames = SubResource("SpriteFrames_vwpnc")
 animation = &"walk-up"
@@ -404,3 +404,9 @@ frame_progress = 0.188598
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Police"]
 scale = Vector2(0.64, 0.64)
 shape = SubResource("CapsuleShape2D_u78xq")
+
+[node name="RayCast2D" type="RayCast2D" parent="Police"]
+
+[node name="spin_timer" type="Timer" parent="Police"]
+
+[connection signal="timeout" from="Police/spin_timer" to="Police" method="_on_spin_timer_timeout"]
