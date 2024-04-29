@@ -1,6 +1,7 @@
-[gd_scene load_steps=54 format=3 uid="uid://d22b4iokbu684"]
+[gd_scene load_steps=55 format=3 uid="uid://d22b4iokbu684"]
 
 [ext_resource type="Texture2D" uid="uid://eolx8ul1sshs" path="res://assets/sprites/Police/idle_1.png" id="1_21vgy"]
+[ext_resource type="Script" path="res://scenes/Police.gd" id="1_awtxc"]
 [ext_resource type="Texture2D" uid="uid://cu0xtb1m5ti11" path="res://assets/sprites/Police/idle_2.png" id="2_ndkbg"]
 [ext_resource type="Texture2D" uid="uid://dk8qgwf40hili" path="res://assets/sprites/Police/walk_police.png" id="3_ehwuy"]
 
@@ -390,9 +391,12 @@ height = 20.0
 [node name="Police" type="Node2D"]
 
 [node name="Police" type="CharacterBody2D" parent="."]
+script = ExtResource("1_awtxc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Police"]
 texture_filter = 1
+position = Vector2(11.5, -10)
+scale = Vector2(1.2875, 1.25)
 sprite_frames = SubResource("SpriteFrames_vwpnc")
 animation = &"walk-up"
 frame_progress = 0.188598

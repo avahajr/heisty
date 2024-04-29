@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://btircvr1vsy0x"]
+[gd_scene load_steps=54 format=3 uid="uid://btircvr1vsy0x"]
 
 [ext_resource type="Texture2D" uid="uid://bml0c8ha8hkh8" path="res://assets/sprites/Base Character /idle_masked.png" id="1_1ba5k"]
+[ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="1_h7ndw"]
 [ext_resource type="Texture2D" uid="uid://bxicujhgflc8s" path="res://assets/sprites/Base Character /walk_masked.png" id="2_xtrp5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6da3f"]
@@ -383,20 +384,24 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjn4n"]
-radius = 8.0
-height = 32.0
+radius = 6.75676
+height = 32.4324
 
 [node name="Bandit" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="bandit" type="CharacterBody2D" parent="."]
 texture_filter = 2
+script = ExtResource("1_h7ndw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bandit"]
 texture_filter = 1
+position = Vector2(-1, -5)
+scale = Vector2(1.525, 1.375)
 sprite_frames = SubResource("SpriteFrames_x5kym")
-animation = &"walk-up"
-frame_progress = 0.94133
+animation = &"idle-left"
+frame = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bandit"]
+visible = false
 scale = Vector2(0.74, 0.48)
 shape = SubResource("CapsuleShape2D_pjn4n")

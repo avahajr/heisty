@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlscouictddoj"]
+
+[ext_resource type="Texture2D" uid="uid://dc5530bwcrfxx" path="res://assets/sprites/Base Character /idle.png" id="1_rmx55"]
+
+[node name="player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, 0)
+texture = ExtResource("1_rmx55")
+hframes = 4
+vframes = 4
+frame = 11

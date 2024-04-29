@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt2nvs2seimqo"
-path="res://.godot/imported/Treasure+.png-7a464788b99a6de9d36a7075ca716373.ctex"
+uid="uid://banxh1q1ky415"
+path="res://.godot/imported/free_overview.png-ae2b933bd88286dbe5c1c8f3853bb718.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Treasure+.png"
-dest_files=["res://.godot/imported/Treasure+.png-7a464788b99a6de9d36a7075ca716373.ctex"]
+source_file="res://assets/tileset/free_overview.png"
+dest_files=["res://.godot/imported/free_overview.png-ae2b933bd88286dbe5c1c8f3853bb718.ctex"]
 
 [params]
 
