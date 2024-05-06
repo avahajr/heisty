@@ -21,15 +21,11 @@ func _process(delta: float) -> void:
 	
 	if input == Vector2(1,0): 
 		sprite2D.play("walk-right")
-		flamethrower.rotation_degrees = 0
-		flamethrower.flip_v = false
-		flamethrower.offset = Vector2(-10, -10)
+		
 		
 	elif input == Vector2(-1,0): 
 		sprite2D.play("walk-left")
-		flamethrower.rotation_degrees = 180
-		flamethrower.flip_v = true
-		flamethrower.offset = Vector2(-10, -15)
+		
 		
 	elif input == Vector2(0,1): 
 		sprite2D.play("walk-down")
@@ -38,6 +34,10 @@ func _process(delta: float) -> void:
 	elif input == Vector2(0,0): 
 		sprite2D.play("idle-down") 
 	
+	
+	var mouse_pos = get_global_mouse_position()
+	flamethrower.look_at(mouse_pos)
+
 	move_and_slide()
 	
 func play_sound():
