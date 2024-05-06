@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite2D = $AnimatedSprite2D
 @onready var footstep = $footsteps
 @onready var flamethrower = $flamethrower
-
+var shoot = false
 
 func _process(delta: float) -> void: 
 	#gets player input
@@ -35,6 +35,15 @@ func _process(delta: float) -> void:
 	
 	var mouse_pos = get_global_mouse_position()
 	flamethrower.look_at(mouse_pos)
+	
+	if (Input.get_action_raw_strength("click")):
+		if (!shoot):
+			$flamethrower/fire.restart()
+			shoot = true
+		$flamethrower/fire.show()
+	else:
+		shoot = false
+		$flamethrower/fire.hide()		
 
 
 	move_and_slide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwmvrdi17vkmp"]
+[gd_scene load_steps=3 format=3 uid="uid://ck7a7mc4dy3f1"]
 
 [ext_resource type="Texture2D" uid="uid://dw60a66os202a" path="res://assets/brushedsteel6-900x675.webp" id="1_qme3s"]
 [ext_resource type="Script" path="res://scenes/start button.gd" id="2_tx8e1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://d22b4iokbu684"]
+[gd_scene load_steps=56 format=3 uid="uid://d22b4iokbu684"]
 
 [ext_resource type="Texture2D" uid="uid://eolx8ul1sshs" path="res://assets/sprites/Police/idle_1.png" id="1_21vgy"]
 [ext_resource type="Script" path="res://scenes/Police.gd" id="1_awtxc"]
@@ -388,6 +388,9 @@ animations = [{
 radius = 12.5
 height = 25.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_duask"]
+size = Vector2(32, 34)
+
 [node name="Police" type="Node2D"]
 
 [node name="Police" type="CharacterBody2D" parent="."]
@@ -407,12 +410,14 @@ shape = SubResource("CapsuleShape2D_u78xq")
 
 [node name="RayCast2D" type="RayCast2D" parent="Police"]
 
-[node name="visualize" type="Line2D" parent="Police/RayCast2D"]
-
 [node name="spin_timer" type="Timer" parent="Police"]
 
 [node name="attack cooldown" type="Timer" parent="Police"]
 wait_time = 10.0
+
+[node name="hitbox" type="CollisionShape2D" parent="Police"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_duask")
 
 [connection signal="timeout" from="Police/spin_timer" to="Police" method="_on_spin_timer_timeout"]
 [connection signal="timeout" from="Police/attack cooldown" to="Police" method="_on_attack_cooldown_timeout"]
