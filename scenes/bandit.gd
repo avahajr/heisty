@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-
 @onready var sprite2D = $AnimatedSprite2D
 @onready var footstep = $footsteps
 @onready var flamethrower = $flamethrower
@@ -15,14 +12,12 @@ func _process(delta: float) -> void:
 	var input := Vector2(x_axis, y_axis).normalized()
 	
 	var speed := 150.0 
-	var previous_y = 0
-	#move player
+	
 	position += input * speed * delta 
 	
 	if input == Vector2(1,0): 
 		sprite2D.play("walk-right")
-		
-		
+		flamethrower.z_index = 1   # Render in front				
 	elif input == Vector2(-1,0): 
 		sprite2D.play("walk-left")
 		flamethrower.z_index = 1   # Render in front		

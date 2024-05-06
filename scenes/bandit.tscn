@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://btircvr1vsy0x"]
+[gd_scene load_steps=58 format=3 uid="uid://btircvr1vsy0x"]
 
 [ext_resource type="Texture2D" uid="uid://bml0c8ha8hkh8" path="res://assets/sprites/Base Character /idle_masked.png" id="1_1ba5k"]
 [ext_resource type="Script" path="res://scenes/bandit.gd" id="1_nfmpr"]
@@ -391,6 +391,14 @@ height = 32.4324
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iysfv"]
 load_path = "res://.godot/imported/flamethrower.png-f96b3057fe7eb3b8ee32918d2191f019.ctex"
 
+[sub_resource type="Curve" id="Curve_31itp"]
+_data = [Vector2(0, 1), 0.0, 0.0338064, 0, 0, Vector2(0.940656, 0.436509), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ffnrm"]
+offsets = PackedFloat32Array(0.0177404, 1)
+colors = PackedColorArray(1, 0.772549, 0, 1, 1, 0.027451, 0, 1)
+
 [node name="Bandit" type="Node2D"]
 
 [node name="bandit" type="CharacterBody2D" parent="."]
@@ -403,7 +411,7 @@ position = Vector2(-2, -6)
 scale = Vector2(1.9, 1.71311)
 sprite_frames = SubResource("SpriteFrames_x5kym")
 animation = &"idle-right"
-frame_progress = 0.671202
+frame_progress = 0.491457
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bandit"]
 visible = false
@@ -413,7 +421,7 @@ shape = SubResource("CapsuleShape2D_pjn4n")
 
 [node name="Camera2D" type="Camera2D" parent="bandit"]
 visible = false
-zoom = Vector2(3, 3)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="footsteps" type="AudioStreamPlayer" parent="bandit"]
@@ -423,9 +431,21 @@ pitch_scale = 0.01
 
 [node name="flamethrower" type="Sprite2D" parent="bandit"]
 texture_filter = 1
-rotation = 3.14159
 scale = Vector2(0.446998, 0.382292)
 texture = SubResource("CompressedTexture2D_iysfv")
 centered = false
 offset = Vector2(-10, -15)
-flip_v = true
+
+[node name="fire" type="CPUParticles2D" parent="bandit/flamethrower"]
+position = Vector2(40, 2.08165e-12)
+amount = 1000
+speed_scale = 2.87
+explosiveness = 0.07
+lifetime_randomness = 0.14
+direction = Vector2(1, 2.08165e-12)
+spread = 14.13
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 36.02
+initial_velocity_max = 104.56
+scale_amount_curve = SubResource("Curve_31itp")
+color_ramp = SubResource("Gradient_ffnrm")
