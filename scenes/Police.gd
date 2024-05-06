@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var spin_timer = $spin_timer
 @onready var _animated_sprite = $AnimatedSprite2D
 var direction = randi() % 4
-var sight_distance = 50
+var sight_distance = 100
 
 var enemy_cooldown = true
 

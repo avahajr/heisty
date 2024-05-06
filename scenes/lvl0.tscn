@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5vo8u4eljdx2"]
+[gd_scene load_steps=21 format=3 uid="uid://c5vo8u4eljdx2"]
 
+[ext_resource type="Script" path="res://scenes/police_spawner.gd" id="1_f4crp"]
 [ext_resource type="Texture2D" uid="uid://coca2hdpkn76d" path="res://assets/tileset/Interiors_free_32x32.png" id="2_yahsv"]
 [ext_resource type="Texture2D" uid="uid://drmsy64ayvx2g" path="res://assets/tileset/Room_Builder_free_32x32.png" id="3_a5gb1"]
 [ext_resource type="Texture2D" uid="uid://dt2nvs2seimqo" path="res://assets/tileset/Treasure+.png" id="3_id224"]
 [ext_resource type="Texture2D" uid="uid://b2nkmgblbm7sg" path="res://assets/tileset/final-image 2.png" id="4_idcnd"]
 [ext_resource type="PackedScene" uid="uid://btircvr1vsy0x" path="res://scenes/bandit.tscn" id="5_hr81i"]
 [ext_resource type="PackedScene" uid="uid://d22b4iokbu684" path="res://scenes/police.tscn" id="6_vw6ar"]
-[ext_resource type="PackedScene" uid="uid://ds25mdwv8uvoa" path="res://scenes/pinkgem.tscn" id="7_8jsnm"]
-[ext_resource type="PackedScene" uid="uid://dsmyl6ui2bhfd" path="res://scenes/chest.tscn" id="8_37c5l"]
-[ext_resource type="PackedScene" uid="uid://dpd532xd0xk5i" path="res://scenes/bluegem.tscn" id="9_c56u5"]
+[ext_resource type="PackedScene" path="res://scenes/pinkgem.tscn" id="7_8jsnm"]
+[ext_resource type="PackedScene" path="res://scenes/chest.tscn" id="8_37c5l"]
+[ext_resource type="PackedScene" path="res://scenes/bluegem.tscn" id="9_c56u5"]
 [ext_resource type="AudioStream" uid="uid://bvjuo1ts5j1uy" path="res://assets/sounds/inspiring-cinematic-ambient-116199.mp3" id="10_705ek"]
 [ext_resource type="AudioStream" uid="uid://2260hqmmdrhi" path="res://assets/sounds/player_axn_loot_ypr.wav" id="10_w1pvn"]
 [ext_resource type="Script" path="res://scenes/game manager.gd" id="11_3m72e"]
@@ -5297,6 +5298,7 @@ sources/3 = SubResource("TileSetAtlasSource_20kqd")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nl4q"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_f4crp")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ab568")
@@ -5411,3 +5413,7 @@ position = Vector2(-297, 78)
 
 [node name="chest1" parent="chest" instance=ExtResource("8_37c5l")]
 position = Vector2(753, 361)
+
+[node name="police_spawn" type="Timer" parent="."]
+
+[connection signal="timeout" from="police_spawn" to="." method="_on_police_spawn_timeout"]
