@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	var input := Vector2(x_axis, y_axis).normalized()
 	
 	var speed := 150.0 
-	
+	var previous_y = 0
 	#move player
 	position += input * speed * delta 
 	
@@ -25,18 +25,22 @@ func _process(delta: float) -> void:
 		
 	elif input == Vector2(-1,0): 
 		sprite2D.play("walk-left")
-		
-		
+		flamethrower.z_index = 1   # Render in front		
 	elif input == Vector2(0,1): 
 		sprite2D.play("walk-down")
+		flamethrower.z_index = 1   # Render in front		
 	elif input == Vector2(0, -1):
+		flamethrower.z_index = -1  # Render behind
 		sprite2D.play("walk-up")
 	elif input == Vector2(0,0): 
 		sprite2D.play("idle-down") 
+		flamethrower.z_index = 1   # Render in front
+		
 	
 	
 	var mouse_pos = get_global_mouse_position()
 	flamethrower.look_at(mouse_pos)
+
 
 	move_and_slide()
 	

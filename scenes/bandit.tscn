@@ -403,7 +403,7 @@ position = Vector2(-2, -6)
 scale = Vector2(1.9, 1.71311)
 sprite_frames = SubResource("SpriteFrames_x5kym")
 animation = &"idle-right"
-frame_progress = 0.441946
+frame_progress = 0.671202
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bandit"]
 visible = false
