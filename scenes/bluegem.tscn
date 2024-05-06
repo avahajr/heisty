@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpd532xd0xk5i"]
+
+[ext_resource type="Texture2D" uid="uid://148o24pe5n24" path="res://assets/4_0031_Package-----------------.png" id="1_e5qh0"]
+[ext_resource type="Script" path="res://scenes/bluegem.gd" id="1_oepbg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ee7w4"]
+size = Vector2(8, 8)
+
+[node name="gem2" type="Area2D"]
+script = ExtResource("1_oepbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(344, 360)
+scale = Vector2(0.241936, 0.241936)
+texture = ExtResource("1_e5qh0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(344, 360)
+shape = SubResource("RectangleShape2D_ee7w4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

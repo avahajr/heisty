@@ -385,8 +385,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u78xq"]
-radius = 8.0
-height = 20.0
+radius = 12.5
+height = 25.0
 
 [node name="Police" type="Node2D"]
 
@@ -395,8 +395,8 @@ script = ExtResource("1_awtxc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Police"]
 texture_filter = 1
-position = Vector2(-9.53674e-07, 0)
-scale = Vector2(1.2875, 1.25)
+position = Vector2(-1, -6)
+scale = Vector2(1.56875, 1.52306)
 sprite_frames = SubResource("SpriteFrames_vwpnc")
 animation = &"walk-up"
 frame_progress = 0.188598
@@ -409,4 +409,8 @@ shape = SubResource("CapsuleShape2D_u78xq")
 
 [node name="spin_timer" type="Timer" parent="Police"]
 
+[node name="attack cooldown" type="Timer" parent="Police"]
+wait_time = 10.0
+
 [connection signal="timeout" from="Police/spin_timer" to="Police" method="_on_spin_timer_timeout"]
+[connection signal="timeout" from="Police/attack cooldown" to="Police" method="_on_attack_cooldown_timeout"]

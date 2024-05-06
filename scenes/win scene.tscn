@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://xyqpu5idod3u"]
+
+[ext_resource type="Texture2D" uid="uid://dw60a66os202a" path="res://assets/brushedsteel6-900x675.webp" id="1_ifvft"]
+[ext_resource type="Texture2D" uid="uid://cs2ax563gjq8g" path="res://assets/file (2).png" id="2_h3081"]
+[ext_resource type="Script" path="res://scenes/restart button.gd" id="3_n2co7"]
+
+[node name="WinScene" type="Node"]
+
+[node name="background" type="TextureRect" parent="."]
+offset_right = 1954.0
+offset_bottom = 1087.0
+texture = ExtResource("1_ifvft")
+
+[node name="gold" type="TextureRect" parent="."]
+offset_left = 350.0
+offset_top = 245.0
+offset_right = 1642.0
+offset_bottom = 783.0
+texture = ExtResource("2_h3081")
+
+[node name="Label" type="Label" parent="gold"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -40.0
+offset_right = 269.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "YOU WIN"
+
+[node name="restart button" type="Button" parent="."]
+offset_left = 644.0
+offset_top = 785.0
+offset_right = 1325.0
+offset_bottom = 910.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Back to Main Menu"
+script = ExtResource("3_n2co7")
+
+[connection signal="pressed" from="restart button" to="restart button" method="_on_pressed"]

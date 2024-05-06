@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwmvrdi17vkmp"]
+
+[ext_resource type="Texture2D" uid="uid://dw60a66os202a" path="res://assets/brushedsteel6-900x675.webp" id="1_qme3s"]
+[ext_resource type="Script" path="res://scenes/start button.gd" id="2_tx8e1"]
+
+[node name="MainMenu" type="Node"]
+
+[node name="background" type="TextureRect" parent="."]
+offset_right = 1955.0
+offset_bottom = 1089.0
+texture = ExtResource("1_qme3s")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.322
+anchor_right = 0.5
+anchor_bottom = 0.322
+offset_left = -743.0
+offset_top = -291.76
+offset_right = 759.0
+offset_bottom = 201.24
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 62.0
+offset_right = 2.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Instructions: 
+Blue Gems are worth 1 points
+Pink Gems are worth 2 points
+Chests are worth 5 points
+Avoid the enemy and collect 10 points to win the game!
+"
+horizontal_alignment = 1
+
+[node name="start button" type="Button" parent="."]
+offset_left = 664.0
+offset_top = 668.0
+offset_right = 1300.0
+offset_bottom = 831.0
+theme_override_font_sizes/font_size = 50
+text = "Play Game"
+script = ExtResource("2_tx8e1")
+
+[connection signal="pressed" from="start button" to="start button" method="_on_pressed"]

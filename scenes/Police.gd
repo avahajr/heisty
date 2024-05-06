@@ -6,6 +6,8 @@ extends CharacterBody2D
 var direction = randi() % 4
 var sight_distance = 50
 
+var enemy_cooldown = true
+
 func _ready():
 	spin_timer.wait_time = randf_range(0, 1)
 	spin_timer.autostart = true
@@ -31,7 +33,8 @@ func _process(delta):
 		print("Hit: ", collider.name)
 
 		# Optionally, you could react to the collision here, e.g., damage an enemy
-
+				
+				
 func _on_spin_timer_timeout():
 	# Randomly change the sprite direction when the timer times out
 	direction = randi() % 4
@@ -46,3 +49,5 @@ func _on_spin_timer_timeout():
 	spin_timer.start()
 
 
+func _on_attack_cooldown_timeout():
+	enemy_cooldown = true 

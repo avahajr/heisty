@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds25mdwv8uvoa"]
+
+[ext_resource type="Script" path="res://scenes/pinkgem.gd" id="1_nl3so"]
+[ext_resource type="Texture2D" uid="uid://d11tfupapfu5j" path="res://assets/4_0004_Package-----------------.png" id="1_wrb4o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2uep0"]
+radius = 9.48148
+height = 45.1139
+
+[node name="gem1" type="Area2D"]
+script = ExtResource("1_nl3so")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, -2)
+scale = Vector2(0.210938, 0.270202)
+texture = ExtResource("1_wrb4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -2)
+scale = Vector2(0.421875, 0.39899)
+shape = SubResource("CapsuleShape2D_2uep0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://btircvr1vsy0x"]
+[gd_scene load_steps=55 format=3 uid="uid://btircvr1vsy0x"]
 
 [ext_resource type="Texture2D" uid="uid://bml0c8ha8hkh8" path="res://assets/sprites/Base Character /idle_masked.png" id="1_1ba5k"]
-[ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="1_h7ndw"]
+[ext_resource type="Script" path="res://scenes/bandit.gd" id="1_nfmpr"]
 [ext_resource type="Texture2D" uid="uid://bxicujhgflc8s" path="res://assets/sprites/Base Character /walk_masked.png" id="2_xtrp5"]
+[ext_resource type="AudioStream" uid="uid://si5tvwna10yg" path="res://assets/sounds/player_movt_steps-grass_dryoma.wav" id="4_lu2af"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6da3f"]
 atlas = ExtResource("1_1ba5k")
@@ -230,7 +231,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle-left",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -293,7 +294,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-down",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -322,7 +323,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-left",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -351,7 +352,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-right",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -380,28 +381,36 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-up",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pjn4n"]
-radius = 6.75676
+radius = 10.8108
 height = 32.4324
 
 [node name="Bandit" type="Node2D"]
 
 [node name="bandit" type="CharacterBody2D" parent="."]
 texture_filter = 2
-script = ExtResource("1_h7ndw")
+script = ExtResource("1_nfmpr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bandit"]
 texture_filter = 1
-position = Vector2(-1, -5)
-scale = Vector2(1.525, 1.375)
+position = Vector2(-2, -6)
+scale = Vector2(1.9, 1.71311)
 sprite_frames = SubResource("SpriteFrames_x5kym")
-animation = &"idle-left"
-frame = 3
+animation = &"walk-up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bandit"]
-visible = false
+position = Vector2(-1, 0)
 scale = Vector2(0.74, 0.48)
 shape = SubResource("CapsuleShape2D_pjn4n")
+
+[node name="Camera2D" type="Camera2D" parent="bandit"]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="footsteps" type="AudioStreamPlayer" parent="bandit"]
+stream = ExtResource("4_lu2af")
+volume_db = -8.0
+pitch_scale = 0.01
