@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://btircvr1vsy0x"]
+[gd_scene load_steps=59 format=3 uid="uid://btircvr1vsy0x"]
 
 [ext_resource type="Texture2D" uid="uid://bml0c8ha8hkh8" path="res://assets/sprites/Base Character /idle_masked.png" id="1_1ba5k"]
 [ext_resource type="Script" path="res://scenes/bandit.gd" id="1_nfmpr"]
@@ -391,6 +391,8 @@ height = 32.4324
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iysfv"]
 load_path = "res://.godot/imported/flamethrower.png-f96b3057fe7eb3b8ee32918d2191f019.ctex"
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ying4"]
+
 [sub_resource type="Curve" id="Curve_31itp"]
 _data = [Vector2(0, 1), 0.0, 0.0338064, 0, 0, Vector2(0.940656, 0.436509), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -426,7 +428,7 @@ position_smoothing_enabled = true
 
 [node name="footsteps" type="AudioStreamPlayer" parent="bandit"]
 stream = ExtResource("4_lu2af")
-volume_db = -8.0
+volume_db = 10.847
 pitch_scale = 0.01
 
 [node name="flamethrower" type="Sprite2D" parent="bandit"]
@@ -435,6 +437,9 @@ scale = Vector2(0.446998, 0.382292)
 texture = SubResource("CompressedTexture2D_iysfv")
 centered = false
 offset = Vector2(-10, -15)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="bandit/flamethrower"]
+stream = SubResource("AudioStreamGenerator_ying4")
 
 [node name="fire" type="CPUParticles2D" parent="bandit/flamethrower"]
 position = Vector2(40, 2.08165e-12)

@@ -17,16 +17,20 @@ func _process(delta: float) -> void:
 	
 	if input == Vector2(1,0): 
 		sprite2D.play("walk-right")
-		flamethrower.z_index = 1   # Render in front				
+		flamethrower.z_index = 1   # Render in front
+		play_footstep()				
 	elif input == Vector2(-1,0): 
 		sprite2D.play("walk-left")
 		flamethrower.z_index = 1   # Render in front		
+		play_footstep()
 	elif input == Vector2(0,1): 
 		sprite2D.play("walk-down")
 		flamethrower.z_index = 1   # Render in front		
+		play_footstep()
 	elif input == Vector2(0, -1):
 		flamethrower.z_index = -1  # Render behind
 		sprite2D.play("walk-up")
+		play_footstep()
 	elif input == Vector2(0,0): 
 		sprite2D.play("idle-down") 
 		flamethrower.z_index = 1   # Render in front
@@ -44,11 +48,10 @@ func _process(delta: float) -> void:
 	else:
 		shoot = false
 		$flamethrower/fire.hide()		
-
-
+		
 	move_and_slide()
 	
-func play_sound():
+func play_footstep():
 	footstep.volume_db = randf_range(-10, -5) 
 	footstep.play()
 	
