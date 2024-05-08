@@ -1,53 +1,151 @@
 extends CharacterBody2D
 
-# Timer node for changing orientation
-@onready var spin_timer = $spin_timer
-@onready var _animated_sprite = $AnimatedSprite2D
-var direction = randi() % 4
-var sight_distance = 100
+const chase_speed = 50
+const wander_speed = 20
+const investigate_speed = 33
 
-var enemy_cooldown = true
+var wandering_dir = Vector2.ZERO
+@export var wander_change: float
+var change_wander_dir = false
 
-func _ready():
-	spin_timer.wait_time = randf_range(0, 1)
-	spin_timer.autostart = true
-	spin_timer.start()
+@export var player: Node2D
+@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var exclaim_sprite := $ExclaimationMark as AnimatedSprite2D
+@onready var question_sprite := $QuestionMark as AnimatedSprite2D
 
+@onready var suspicion_timer := $SuspicionTimer as Timer
 
-func _process(delta):
-	# Assume the RayCast2D node is named "RayCast2D" and is a child of this sprite
-	var ray_cast = $RayCast2D
+# When the player is within range, bat STARTS chasing
+@export var trigger_distance: float
 
-	# Make sure the raycast is enabled
-	ray_cast.enabled = true
+# if the player makes a noise within this radius, the bat will investigate noise
+@export var earshot_radius: float
+
+# is the bat currently pursuing the player (! anim has been played)
+var is_chasing = false 
+
+# this flag should be true if the player is out of distance range but making noise.
+var is_suspicious = false;
+
+var enemy_cooldown = true 
+
+### PHYSICS LOOP ###
+func _physics_process(_delta:float) -> void:
+	# 3 options: wander (default), investigate, chase
 	
-	match direction:
-		0: ray_cast.set_target_position(Vector2(0, sight_distance))
-		1: ray_cast.set_target_position(Vector2(-sight_distance, 0))
-		2: ray_cast.set_target_position(Vector2(0, sight_distance))
-		3: ray_cast.set_target_position(Vector2(sight_distance, 0))
-
-	# Check if the raycast hits something
-	if ray_cast.is_colliding():
-		var collider = ray_cast.get_collider()
-		print("Hit: ", collider.name)
-
-		# Optionally, you could react to the collision here, e.g., damage an enemy
-				
-				
-func _on_spin_timer_timeout():
-	# Randomly change the sprite direction when the timer times out
-	direction = randi() % 4
-	match direction:
-		0: _animated_sprite.play('idle-down')
-		1: _animated_sprite.play('idle-right')
-		2: _animated_sprite.play('idle-up')
-		3: _animated_sprite.play('idle-left')
+	var dir
+	var speed
 	
-	# Reset the timer with a new random interval
-	spin_timer.wait_time = randf_range(0, 1)
-	spin_timer.start()
+	is_suspicious = get_enemy_suspicion()
+	is_chasing = get_enemy_chase_status()
+				
+	# chase if in range
+	if (is_chasing):
+		dir = to_local(nav_agent.get_next_path_position()).normalized()
+		speed = chase_speed
+		
+	# investigate if suspicious
+	elif (is_suspicious):	
+		exclaim_sprite.hide()
+		animate_suspicious()
+		dir = to_local(nav_agent.get_next_path_position()).normalized()
+		speed = investigate_speed
+		is_chasing = false
+	else:
+		speed = wander_speed
+		if (change_wander_dir):
+			# else, change direction a little bit			
+			wandering_dir.x += wander_change * randf_range(-1,1)
+			wandering_dir.y += wander_change * randf_range(-1,1)
+			change_wander_dir = false
+			
+		dir = wandering_dir.normalized()
+		is_chasing = false
+		
+
+	velocity = dir * speed
+	wandering_dir = dir
+	move_and_slide()
+	
+### ENEMY ATTACK PLAYER ###
+	for i in range(get_slide_collision_count()):
+		if enemy_cooldown == true:
+			var collision = get_slide_collision(i)
+			var object = collision.get_collider()
+			if object.is_in_group("player"):
+				object.lost_health() 
+				enemy_cooldown = false  
+				$AttackCooldown.start()
+			#$AttackCooldown.start()
+		#var object = collision.get_collider
 
 
 func _on_attack_cooldown_timeout():
 	enemy_cooldown = true 
+
+### AI BEHAVIOR ### 
+func make_path() -> void:
+	nav_agent.target_position = player.global_position
+
+func _on_path_regen_timeout():
+	# make a path every _ seconds
+	make_path() 
+
+func _on_suspicion_timer_timeout():
+	is_suspicious = false
+	question_sprite.hide()
+	suspicion_timer.stop()
+
+	print('no longer suspicious!')
+	
+
+func _on_change_wander_dir_timeout():
+	change_wander_dir = true
+	
+func get_enemy_suspicion() -> bool:
+	# helper function to ask if the bat should be suspicious.
+	# conditions: nonzero input and within earshot and NOT seen
+	
+	var has_nonzero_input: bool = Vector2(Input.get_action_strength("move_right") - 
+		Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_down") - 
+		Input.get_action_strength("move_up")).length() != 0
+		
+	var is_within_earshot: bool = self.position.distance_to(player.position) <= earshot_radius
+	
+	var is_not_seen: bool = nav_agent.distance_to_target() > trigger_distance
+	return  has_nonzero_input && is_within_earshot && is_not_seen
+
+
+func get_enemy_chase_status() -> bool:
+	# if already chasing, then chase radius increases
+	var chase_boost = 20 if is_chasing else 0
+	
+	# if not currently chasing but in range, do ! anim
+	if ( !is_chasing && nav_agent.distance_to_target() <= trigger_distance ):
+		animate_spotted()
+		
+	return nav_agent.distance_to_target() <= trigger_distance + chase_boost 
+ 
+	
+### REACTION SPRITE ANIMATIONS ###
+func animate_spotted():
+	question_sprite.hide()
+	exclaim_sprite.show()	
+	exclaim_sprite.play("default")
+	is_chasing = true
+
+func _on_exclaimation_mark_animation_finished():
+	exclaim_sprite.hide()
+
+func animate_suspicious():
+	question_sprite.show()
+	exclaim_sprite.hide()
+	question_sprite.play("default")
+	is_suspicious = true
+	suspicion_timer.start()
+
+func _on_question_mark_animation_finished():
+	question_sprite.hide()
+
+

@@ -1,9 +1,11 @@
-[gd_scene load_steps=56 format=3 uid="uid://d22b4iokbu684"]
+[gd_scene load_steps=72 format=3 uid="uid://d22b4iokbu684"]
 
 [ext_resource type="Texture2D" uid="uid://eolx8ul1sshs" path="res://assets/sprites/Police/idle_1.png" id="1_21vgy"]
 [ext_resource type="Script" path="res://scenes/Police.gd" id="1_awtxc"]
 [ext_resource type="Texture2D" uid="uid://cu0xtb1m5ti11" path="res://assets/sprites/Police/idle_2.png" id="2_ndkbg"]
 [ext_resource type="Texture2D" uid="uid://dk8qgwf40hili" path="res://assets/sprites/Police/walk_police.png" id="3_ehwuy"]
+[ext_resource type="Texture2D" uid="uid://btrl5mvj4yafh" path="res://assets/sprites/Police/emotes/exclamation-7x8.png" id="5_iptpf"]
+[ext_resource type="Texture2D" uid="uid://w0hl45ptbymy" path="res://assets/sprites/Police/emotes/QuestionMark.png" id="6_p6dre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybh0b"]
 atlas = ExtResource("1_21vgy")
@@ -391,12 +393,113 @@ height = 25.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_duask"]
 size = Vector2(32, 34)
 
-[node name="Police" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4e8a"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(0, 0, 7, 8)
 
-[node name="Police" type="CharacterBody2D" parent="."]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nxmg"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(7, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v0ja"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(14, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5btd"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(21, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aci3j"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(28, 0, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q7f1"]
+atlas = ExtResource("5_iptpf")
+region = Rect2(35, 0, 7, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ixyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4e8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nxmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v0ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5btd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aci3j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q7f1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3wpq"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(0, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkyvh"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(14, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyj2v"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(28, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8o4ef"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(42, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w23lr"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(56, 0, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i74j6"]
+atlas = ExtResource("6_p6dre")
+region = Rect2(70, 0, 14, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4vvin"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3wpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkyvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyj2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8o4ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w23lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i74j6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Police" type="CharacterBody2D"]
 script = ExtResource("1_awtxc")
+wander_change = 0.2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Police"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-1, -6)
 scale = Vector2(1.56875, 1.52306)
@@ -404,20 +507,39 @@ sprite_frames = SubResource("SpriteFrames_vwpnc")
 animation = &"walk-up"
 frame_progress = 0.188598
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Police"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.64, 0.64)
 shape = SubResource("CapsuleShape2D_u78xq")
 
-[node name="RayCast2D" type="RayCast2D" parent="Police"]
-
-[node name="spin_timer" type="Timer" parent="Police"]
-
-[node name="attack cooldown" type="Timer" parent="Police"]
-wait_time = 10.0
-
-[node name="hitbox" type="CollisionShape2D" parent="Police"]
+[node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_duask")
 
-[connection signal="timeout" from="Police/spin_timer" to="Police" method="_on_spin_timer_timeout"]
-[connection signal="timeout" from="Police/attack cooldown" to="Police" method="_on_attack_cooldown_timeout"]
+[node name="ExclaimationMark" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2ixyk")
+frame_progress = 0.480738
+
+[node name="QuestionMark" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_4vvin")
+
+[node name="SuspicionTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="PathRegen" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+autostart = true
+
+[node name="ChangeWanderDir" type="Timer" parent="."]
+wait_time = 2.847
+autostart = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="ExclaimationMark" to="." method="_on_exclaimation_mark_animation_finished"]
+[connection signal="animation_finished" from="QuestionMark" to="." method="_on_question_mark_animation_finished"]
+[connection signal="timeout" from="SuspicionTimer" to="." method="_on_suspicion_timer_timeout"]
+[connection signal="timeout" from="PathRegen" to="." method="_on_path_regen_timeout"]
+[connection signal="timeout" from="ChangeWanderDir" to="." method="_on_change_wander_dir_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

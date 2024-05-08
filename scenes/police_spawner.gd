@@ -12,7 +12,8 @@ func _process(delta):
 
 
 func _on_police_spawn_timeout():
-	var pig = police_scene.instantiate()
-	pig.position = $Bandit.position
-	add_child(pig)
+	print('spawn police now...')
+	#var pig = police_scene.instantiate()
+	#pig.position = $Bandit.position
+	#add_child(pig)
 
