@@ -18,7 +18,7 @@ func _on_police_spawn_timeout():
 	
 	var bandit = $Bandit.position  # Get the position of the bandit
 	var angle = randf_range(0, 2 * PI)  # Random angle in radians
-	var radius = 50  # Random radius from 0 to 50 pixels
+	var radius = 50 
 	
 	# Calculate the new position
 	var x_offset = cos(angle) * radius
