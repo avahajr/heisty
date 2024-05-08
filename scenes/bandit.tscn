@@ -410,8 +410,7 @@ texture_filter = 1
 position = Vector2(-2, -6)
 scale = Vector2(1.9, 1.71311)
 sprite_frames = SubResource("SpriteFrames_x5kym")
-animation = &"idle-right"
-frame_progress = 0.491457
+animation = &"walk-down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -452,3 +451,5 @@ initial_velocity_min = 36.02
 initial_velocity_max = 104.56
 scale_amount_curve = SubResource("Curve_31itp")
 color_ramp = SubResource("Gradient_ffnrm")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="play_footstep"]

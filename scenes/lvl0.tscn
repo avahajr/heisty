@@ -5717,5 +5717,6 @@ position = Vector2(-297, 78)
 position = Vector2(753, 361)
 
 [node name="police_spawn" type="Timer" parent="."]
+wait_time = 10.0
 
 [connection signal="timeout" from="police_spawn" to="." method="_on_police_spawn_timeout"]
