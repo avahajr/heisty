@@ -3,6 +3,7 @@ extends CharacterBody2D
 const chase_speed = 40
 const wander_speed = 20
 const investigate_speed = 33
+var is_intersecting_with_flame = false
 
 var wandering_dir = Vector2.ZERO
 @export var wander_change: float
@@ -14,6 +15,7 @@ var change_wander_dir = false
 @onready var question_sprite := $QuestionMark as AnimatedSprite2D
 @onready var police_sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var suspicion_timer := $SuspicionTimer as Timer
+@onready var hitbox = $Area2D/hitbox
 
 # When the player is within range, bat STARTS chasing
 @export var trigger_distance: float
@@ -45,6 +47,10 @@ func get_dir_from_vector(dir: Vector2) -> String:
 
 ### PHYSICS LOOP ###
 func _physics_process(_delta:float) -> void:
+	if is_intersecting_with_flame:
+		hide()
+		queue_free()
+		
 	# 3 options: wander (default), investigate, chase
 	
 	var dir
@@ -80,6 +86,8 @@ func _physics_process(_delta:float) -> void:
 	velocity = dir * speed
 	police_sprite.play("walk-" + get_dir_from_vector(dir))
 	wandering_dir = dir
+	
+	
 	move_and_slide()
 	
 ### ENEMY ATTACK PLAYER ###
@@ -164,3 +172,13 @@ func _on_question_mark_animation_finished():
 	question_sprite.hide()
 
 
+func _on_hitbox_body_entered(body):
+	print("entered", body.name)
+	if (body.name == "Flame" and Input.get_action_raw_strength("click")):
+		is_intersecting_with_flame = true
+
+
+
+func _on_area_2d_area_exited(area):
+	if area.name == 'Flame':
+		is_intersecting_with_flame = false

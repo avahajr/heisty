@@ -451,10 +451,11 @@ initial_velocity_max = 104.56
 scale_amount_curve = SubResource("Curve_31itp")
 color_ramp = SubResource("Gradient_ffnrm")
 
-[node name="Area2D" type="Area2D" parent="flamethrower/fire"]
+[node name="Flame" type="Area2D" parent="flamethrower/fire"]
 collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="flamethrower/fire/Area2D"]
-polygon = PackedVector2Array(-4.20566, -2.08165e-12, 70, 18, 70, -18)
+[node name="Flame" type="CollisionPolygon2D" parent="flamethrower/fire/Flame" groups=["flame"]]
+polygon = PackedVector2Array(-4.20566, -2.08165e-12, 70, 9, 70, -9.84)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="play_footstep"]
