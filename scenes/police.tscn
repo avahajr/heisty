@@ -516,6 +516,7 @@ position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_duask")
 
 [node name="ExclaimationMark" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.08165e-12, -26.7)
 sprite_frames = SubResource("SpriteFrames_2ixyk")
 frame_progress = 0.480738
 

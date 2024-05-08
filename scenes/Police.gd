@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const chase_speed = 50
+const chase_speed = 40
 const wander_speed = 20
 const investigate_speed = 33
 
@@ -12,7 +12,7 @@ var change_wander_dir = false
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var exclaim_sprite := $ExclaimationMark as AnimatedSprite2D
 @onready var question_sprite := $QuestionMark as AnimatedSprite2D
-
+@onready var police_sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var suspicion_timer := $SuspicionTimer as Timer
 
 # When the player is within range, bat STARTS chasing
@@ -28,6 +28,20 @@ var is_chasing = false
 var is_suspicious = false;
 
 var enemy_cooldown = true 
+
+func get_dir_from_vector(dir: Vector2) -> String:
+	
+	if abs(dir.x) > abs(dir.y):
+		if dir.x > 0:
+			return "right"
+		else:
+			return "left"
+	else:
+		if dir.y > 0:
+			return "down"
+		else:
+			return "up"
+			
 
 ### PHYSICS LOOP ###
 func _physics_process(_delta:float) -> void:
@@ -61,9 +75,10 @@ func _physics_process(_delta:float) -> void:
 			
 		dir = wandering_dir.normalized()
 		is_chasing = false
-		
-
+			
+	
 	velocity = dir * speed
+	police_sprite.play("walk-" + get_dir_from_vector(dir))
 	wandering_dir = dir
 	move_and_slide()
 	

@@ -5615,6 +5615,7 @@ position = Vector2(-85, 116)
 position = Vector2(28, 282)
 player = NodePath("../Bandit")
 trigger_distance = 50.0
+earshot_radius = 100.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Police"]
 visible = false
