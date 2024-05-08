@@ -425,8 +425,7 @@ position_smoothing_enabled = true
 
 [node name="footsteps" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_lu2af")
-volume_db = 10.847
-pitch_scale = 0.01
+volume_db = 24.0
 
 [node name="flamethrower" type="Sprite2D" parent="."]
 texture_filter = 1

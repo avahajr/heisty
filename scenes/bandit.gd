@@ -52,8 +52,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 func play_footstep():
-	if $AnimatedSprite2D.animation.begins_with("walk-"):
-		
+	if $AnimatedSprite2D.animation.begins_with("walk-") and $AnimatedSprite2D.frame in [1, 5]:
 		footstep.volume_db = randf_range(-10, -5) 
 		footstep.play()
 	

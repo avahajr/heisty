@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://b2nkmgblbm7sg" path="res://assets/tileset/final-image 2.png" id="4_idcnd"]
 [ext_resource type="PackedScene" uid="uid://btircvr1vsy0x" path="res://scenes/bandit.tscn" id="5_hr81i"]
 [ext_resource type="PackedScene" uid="uid://d22b4iokbu684" path="res://scenes/police.tscn" id="6_vw6ar"]
-[ext_resource type="PackedScene" uid="uid://ds25mdwv8uvoa" path="res://scenes/pinkgem.tscn" id="7_8jsnm"]
-[ext_resource type="PackedScene" uid="uid://dsmyl6ui2bhfd" path="res://scenes/chest.tscn" id="8_37c5l"]
-[ext_resource type="PackedScene" uid="uid://dpd532xd0xk5i" path="res://scenes/bluegem.tscn" id="9_c56u5"]
+[ext_resource type="PackedScene" path="res://scenes/pinkgem.tscn" id="7_8jsnm"]
+[ext_resource type="PackedScene" path="res://scenes/chest.tscn" id="8_37c5l"]
+[ext_resource type="PackedScene" path="res://scenes/bluegem.tscn" id="9_c56u5"]
 [ext_resource type="AudioStream" uid="uid://bvjuo1ts5j1uy" path="res://assets/sounds/inspiring-cinematic-ambient-116199.mp3" id="10_705ek"]
 [ext_resource type="AudioStream" uid="uid://2260hqmmdrhi" path="res://assets/sounds/player_axn_loot_ypr.wav" id="10_w1pvn"]
 [ext_resource type="Script" path="res://scenes/game manager.gd" id="11_3m72e"]
@@ -5648,7 +5648,7 @@ text = "Health Left: "
 
 [node name="bg music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_705ek")
-volume_db = 1.0
+volume_db = -13.586
 pitch_scale = 0.32
 autoplay = true
 
