@@ -25,6 +25,6 @@ func addChest():
 	check_end_scene()
 
 func check_end_scene(): 
-	if(points == 10): 
+	if(points >= 10): 
 		get_tree().change_scene_to_file("res://scenes/win scene.tscn")
 	
